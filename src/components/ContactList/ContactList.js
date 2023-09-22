@@ -3,8 +3,9 @@ import {ListStyled,  ItemStyled,   DeleteButton, ResetBtn, Wrapper} from './Cont
 import {ImUserMinus, ImLoop2} from "react-icons/im";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact,resetDeletedContacts} from 'redux/contactsSlice';
-import { getFilteredContacts } from 'redux/selectors';
+import { deleteContact, restoreDeletedContacts } from 'redux/operations';
+import { selectFilteredContacts, selectRestoredContacts } from 'redux/selectors';
+
 
 
 const icon = {
@@ -14,8 +15,10 @@ const icon = {
 
 
 export const ContactList = () => {
-  const filteredContacts = useSelector(getFilteredContacts);
-  console.log(filteredContacts);
+  const filteredContacts = useSelector(selectFilteredContacts); 
+  //  console.log(filteredContacts);
+  const restoredContacts = useSelector(selectRestoredContacts); 
+
   const dispatch = useDispatch();
 
   const onDeleteContact = (contactId) => {
@@ -23,11 +26,11 @@ export const ContactList = () => {
   };
 
 const resetChanges = () => {
-  dispatch(resetDeletedContacts());
+  dispatch(restoreDeletedContacts([]));
 }
 
 if (!Array.isArray(filteredContacts) || filteredContacts.length === 0) {
-  console.log(filteredContacts);
+  // console.log(filteredContacts);
   return null;
 }
   return (
@@ -45,7 +48,7 @@ if (!Array.isArray(filteredContacts) || filteredContacts.length === 0) {
          
         ))}
       </ListStyled>
-      <ResetBtn onClick={resetChanges}>{icon.reset}Reset</ResetBtn>
+      <ResetBtn onClick={resetChanges}>{icon.reset}Reset{restoreDeletedContacts.length > 0 && ` (${restoredContacts.length} відновлені)`}</ResetBtn>
     </Wrapper>
   );
 };

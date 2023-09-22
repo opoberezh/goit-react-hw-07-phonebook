@@ -1,14 +1,23 @@
-// import { store } from "./store";
 import { createSelector } from '@reduxjs/toolkit';
-// import {toast} from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 
 
-export const getContacts = store => store.contacts.items;
 
-export const getFilter = store => store.filter;
+export const selectContacts = state => 
+state.contacts.items;
 
-export const getFilteredContacts = createSelector([getContacts, getFilter],(contacts, filter)  => {
+export const selectDeletedContacts = state => state.contacts.deletedContacts;
+
+export const selectRestoredContacts = state => state.contacts.deletedContacts;
+
+export const selectIsLoading = state => state.contacts.isLoading;
+
+
+export const selectError = state => state.contacts.error;
+
+
+export const selectFilter = state => state.filter;
+
+export const selectFilteredContacts = createSelector([selectContacts, selectFilter],(contacts, filter)  => {
 
   return contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())

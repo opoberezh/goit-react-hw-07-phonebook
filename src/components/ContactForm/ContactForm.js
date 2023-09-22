@@ -8,8 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Styleform, StyledField, StyledLabel, ErrorMessageStyled, HeroTitleStyled, SubmitBtn } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactsSlice';
+import { selectContacts } from 'redux/selectors';
+import { addContacts } from 'redux/operations';
 
 
 const icon ={
@@ -41,7 +41,7 @@ const schema = Yup.object().shape({
 const initialValues = { name: '', number: '' };
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const onAddContact = newContact => {
@@ -61,7 +61,7 @@ export const ContactForm = () => {
       name: newContact.name,
       number: newContact.number,
     };
-  const action = addContact(newItem);
+  const action = addContacts(newItem);
     dispatch(action);
   };
   

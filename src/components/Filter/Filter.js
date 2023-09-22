@@ -1,7 +1,7 @@
 import {WrapperFilter, TitleStyled, TextStyledFilter, InputStyled} from './Filter.styled';
 import {ImSearch, ImUsers} from "react-icons/im";
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilter } from 'redux/selectors';
+import { selectFilter } from 'redux/selectors';
 import {setFilter} from '../../redux/filterSlice';
 
 
@@ -11,8 +11,9 @@ const icons = {
 };
 
 export const Filter = () => {
-  const filter = useSelector(getFilter);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
+
   const changeFilter = evt => {
 dispatch(setFilter(evt.target.value.toLowerCase().trim()));
   }
