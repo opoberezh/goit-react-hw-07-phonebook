@@ -49,7 +49,7 @@ export const ContactForm = () => {
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
       
     );
-    console.log(newContact)
+   
     if (existingContact) {
       toast.info(`${newContact.name} is already in contacts.`, {
         position: "top-right",
@@ -71,7 +71,7 @@ export const ContactForm = () => {
       validationSchema={schema}
       onSubmit={(values, actions) => {
         // console.log('Before resetForm');
-        onAddContact({...values, id: nanoid()});
+        onAddContact({...values});
         actions.resetForm();
         // console.log('After resetForm');
       }}
