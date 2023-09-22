@@ -56,12 +56,8 @@ export const ContactForm = () => {
         autoClose: 2000,});
       return;
     }
-    const newItem = {
-     
-      name: newContact.name,
-      number: newContact.number,
-    };
-  const action = addContacts(newItem);
+    
+  const action = addContacts(newContact);
     dispatch(action);
   };
   
