@@ -1,6 +1,6 @@
 import { Formik, ErrorMessage  } from 'formik';
 import * as Yup from 'yup';
-import { nanoid } from "nanoid";
+
 import { ImAddressBook, ImUserPlus, ImUser, ImPhone } from "react-icons/im";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -57,7 +57,7 @@ export const ContactForm = () => {
       return;
     }
     const newItem = {
-      id: nanoid(),
+     
       name: newContact.name,
       number: newContact.number,
     };
