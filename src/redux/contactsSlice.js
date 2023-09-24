@@ -35,7 +35,13 @@ const handleDeleteContactFulfilled = (state, action) => {
 const handleRestoreDeletedContatsFulfilled = (state, action) => {
     state.isLoading = false;
     state.error = null;
-    state.deletedContacts = state.deletetdContacts.filter(contact => !action.payload.come(restoredContact => restoredContact.id === contact.id));
+    // Удалить восстановленные контакты из state.deletedContacts
+  state.deletedContacts = state.deletedContacts.filter((deletedContact) => {
+    return !action.payload.includes(deletedContact.id);
+  });
+
+  // Добавить восстановленные контакты в state.items
+  state.items = [...state.items, ...action.payload];
 };
 
 export const contactsSlice = createSlice({

@@ -8,6 +8,7 @@ import { selectFilteredContacts, selectRestoredContacts } from 'redux/selectors'
 
 
 
+
 const icon = {
     minusUser: <ImUserMinus/>,
     reset: <ImLoop2/>
@@ -26,7 +27,8 @@ export const ContactList = () => {
   };
 
 const resetChanges = () => {
-  dispatch(restoreDeletedContacts([]));
+  
+  dispatch(restoreDeletedContacts(restoredContacts));
 }
 
 if (!Array.isArray(filteredContacts) || filteredContacts.length === 0) {
@@ -48,7 +50,7 @@ if (!Array.isArray(filteredContacts) || filteredContacts.length === 0) {
          
         ))}
       </ListStyled>
-      <ResetBtn onClick={resetChanges}>{icon.reset}Reset{restoreDeletedContacts.length > 0 && ` (${restoredContacts.length} відновлені)`}</ResetBtn>
+      <ResetBtn onClick={resetChanges}>{icon.reset}Reset</ResetBtn>
     </Wrapper>
   );
 };
